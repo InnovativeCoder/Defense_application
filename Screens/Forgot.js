@@ -11,25 +11,19 @@ function Login({navigation}) {
             .string()
             .email("Please enter valid email")
             .required('Email Address is Required'),
-        password: yup
-            .string()
-            // .min(8, ({ min }) => `Password must be at least ${min} characters`)
-            .required('Password is required'),
     })
     return (
         <View style={styles.container}>
-          <Text>Login</Text>
+          <Text>Forgot Password</Text>
           {/* <StatusBar style="auto" /> */}
           <Formik
             validationSchema={loginValidationSchema}
-            initialValues={{ email: '', password: '' }}
-            // onSubmit={values => console.log(values)}
-            onSubmit={values => axios.post("http://localhost:5000/api/login", {
+            initialValues={{ email: '' }}
+            onSubmit={values => axios.put("http://localhost:5000/api/password/forget", {
                 email: values.email,
                 password: values.password,
               }).then(
-                ToastAndroid.show('Logged in successfully!', ToastAndroid.SHORT),      
-                navigation.navigate('Profile')
+                ToastAndroid.show('Reset Link sent successfully!', ToastAndroid.SHORT)
               )
             }
             >
@@ -54,36 +48,14 @@ function Login({navigation}) {
                 {errors.email &&
                     <Text style={{ fontSize: 10, color: 'red' }}>{errors.email}</Text>
                 }
-                <TextInput
-                    name="password"
-                    placeholder="Password"
-                    style={styles.input}
-                    onChangeText={handleChange('password')}
-                    onBlur={handleBlur('password')}
-                    value={values.password}
-                    secureTextEntry
-                />
-                {errors.password &&
-                    <Text style={{ fontSize: 10, color: 'red' }}>{errors.password}</Text>
-                }
                 <Button
                     onPress={handleSubmit}
-                    title="LOGIN"
+                    title="Submit"
                     disabled={!isValid}
                 />
                 </>
             )}
             </Formik>
-          <Button
-                title="Register?"
-                onPress={() => navigation.navigate('SignUp')}
-                style={styles.registerButton}
-            />
-        <Button
-             title="Forgot Password?" 
-             style={styles.forgetPassButton} 
-             onPress={() => navigation.navigate('Forgot')}
-             />
         </View>
     )
 }

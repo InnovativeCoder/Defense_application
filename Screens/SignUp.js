@@ -1,6 +1,7 @@
+import axios from "axios";
 import { Field, Formik } from 'formik';
 import { default as React } from 'react';
-import { Button, StyleSheet, Text, View } from 'react-native';
+import { Button, StyleSheet, Text, ToastAndroid, View } from 'react-native';
 import * as yup from 'yup';
 import CustomInput from '../components/customInput';
 
@@ -47,7 +48,16 @@ function SignUp({navigation}) {
               password: '',
               confirmPassword: '',
             }}
-            onSubmit={values => console.log(values)}
+            // onSubmit={values => console.log(values)}
+            onSubmit={
+              values => axios.post("http://localhost:5000/api/register", {
+              name: values.name,
+              email: values.email,
+              password: values.password,
+            }).then(
+              ToastAndroid.show('Registered successfully!', ToastAndroid.SHORT)
+            )
+          }
           >
             {({ handleSubmit, isValid }) => (
               <>
@@ -70,7 +80,7 @@ function SignUp({navigation}) {
                 />
                 <Field
                   component={CustomInput}
-                  name="passowrd"
+                  name="password"
                   placeholder="Password"
                   secureTextEntry
                 />
@@ -84,7 +94,7 @@ function SignUp({navigation}) {
                 <Button
                   onPress={handleSubmit}
                   title="SIGN UP"
-                  disabled={!isValid}
+                  // disabled={!isValid}
                 />
               </>
             )}
