@@ -19,7 +19,7 @@ function Login({navigation}) {
           <Formik
             validationSchema={loginValidationSchema}
             initialValues={{ email: '' }}
-            onSubmit={values => axios.put("http://localhost:5000/api/password/forget", {
+            onSubmit={values => axios.put("https://def-sec-app.herokuapp.com/api/password/forget", {
                 email: values.email,
                 password: values.password,
               }).then(

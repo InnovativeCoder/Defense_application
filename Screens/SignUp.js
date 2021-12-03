@@ -50,7 +50,7 @@ function SignUp({navigation}) {
             }}
             // onSubmit={values => console.log(values)}
             onSubmit={
-              values => axios.post("http://localhost:5000/api/register", {
+              values => axios.post("https://def-sec-app.herokuapp.com/api/register", {
               name: values.name,
               email: values.email,
               password: values.password,

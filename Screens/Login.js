@@ -24,7 +24,7 @@ function Login({navigation}) {
             validationSchema={loginValidationSchema}
             initialValues={{ email: '', password: '' }}
             // onSubmit={values => console.log(values)}
-            onSubmit={values => axios.post("http://localhost:5000/api/login", {
+            onSubmit={values => axios.post("https://def-sec-app.herokuapp.com/api/login", {
                 email: values.email,
                 password: values.password,
               }).then(
