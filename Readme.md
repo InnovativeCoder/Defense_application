@@ -3,7 +3,7 @@
 ### Tech Stack ->
 
 - React native
-- SQL
-- PHP
+- MongoDB
+- Node.js
 
-Final Project for submission.
+
